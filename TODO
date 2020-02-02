@@ -1,0 +1,4 @@
+Write hoc to retrieve data for backend
+split desktop and mobile
+write code to determine desktop or mobile. 
+Conditionally render cards determining whether or not the manga is a usermanga.
