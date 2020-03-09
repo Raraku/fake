@@ -97,7 +97,6 @@ function LastReadMangaIcon(props) {
                     </tbody>
                   </Table>
                 </Card.Text>
-                <Badge variant="danger">{props.rank}</Badge>
                 <Card.Subtitle className="text-muted">
                   {props.author}
                 </Card.Subtitle>
