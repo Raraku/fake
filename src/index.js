@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import authReducer from "./store/reducers/auth";
+import "./index.css";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://127.0.0.1:8000";
+axios.defaults.baseURL = "https://elitemanga-79e49.appspot.com/";
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

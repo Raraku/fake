@@ -31,7 +31,8 @@ export const addManga = () => {
 export const saveManga = (manga) => {
   return {
     type: actionTypes.GET_MANGA,
-    manga
+    manga: manga,
+    mangaLoading: false
   };
 };
 
@@ -56,6 +57,7 @@ export const getManga = () => {
     });
   };
 };
+
 export const checkAuthTimeout = (expirationTime) => {
   return (dispatch) => {
     setTimeout(() => {
@@ -74,7 +76,7 @@ export const authLogin = (email, password) => {
       })
       .then((res) => {
         const token = res.data.key;
-        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        const expirationDate = new Date(new Date().getTime() + 3600 * 100000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
         dispatch(authSuccess(token));

@@ -1,20 +1,20 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "EliteManga",
+  "name": "EliteManga",
   "gcm_sender_id": "525872563894",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "elitemanga-logo-tiny.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "elitemanga-logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "elitemanga-logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }

@@ -1,38 +1,110 @@
-.App {
-  text-align: center;
+/* * {
+  border-style: solid;
+  border-width: 1px;
+} */
+.mynav {
+  background-color: darkgray;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.flex-column {
+  background-color: rgb(190, 183, 183);
+  position: fixed;
+  padding-left: 0.5em !important;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  top: 10%;
+  margin-top: 4em;
+  border-radius: 0 12px 12px 0;
+  font-size: 2.5em;
+  align-self: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.sidebar-text {
+  font-size: 1rem;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.manga-card {
+  margin: 0.5em 0;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.recent-paper {
+  padding: 1em;
+}
+.mycard-description {
+  height: 5.714em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mycard-description::before {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 1.4285em;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1) 50%
+  );
+}
+.kami {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MuiPaper-root {
+  padding: 2em 0.5em !important;
+}
+.manga-card-single {
+  font-size: 1.5em;
+}
+.special-card {
+  border-style: none !important;
+}
+.special-selection {
+  cursor: pointer;
+  word-wrap: break-word;
+  line-height: 1em;
+  white-space: normal;
+  outline: 0;
+  transform: rotateZ(0);
+  min-width: 14em;
+  min-height: 2.71428571em;
+  background: #fff;
+  display: inline-block;
+  padding: 0.78571429em 2.1em 0.78571429em 1em;
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: none;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
+  transition: box-shadow 0.1s ease, width 0.1s ease;
+}
+.chapter-page-container {
+  width: 100%;
+  display: flex;
+  margin-top: 0.3em;
+  justify-content: center;
+}
+.load-modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+.modal-content {
+  border-style: none !important;
+  border-radius: 0 !important;
+}
+.a-paper {
+  height: 700px;
+  text-align: center;
+}
+.a {
+  text-decoration: none !important;
+  color: none !important;
 }

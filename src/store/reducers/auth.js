@@ -4,8 +4,9 @@ import { updateObject } from "../utility";
 const initialState = {
   token: null,
   error: null,
-  manga: [{ alias: "one-boy", time: "place" }, []],
-  loading: false
+  mangaLoading: true,
+  manga: [],
+  loading: true
 };
 
 const authStart = (state, action) => {
@@ -42,7 +43,8 @@ const addManga = (state, action) => {
 };
 const getManga = (state, action) => {
   return updateObject(state, {
-    manga: action.manga
+    manga: action.manga,
+    mangaLoading: action.mangaLoading
   });
 };
 
@@ -56,6 +58,7 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
+
     case actionTypes.ADD_MANGA:
       return addManga(state, action);
     case actionTypes.GET_MANGA:
