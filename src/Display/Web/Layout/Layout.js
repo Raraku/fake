@@ -87,11 +87,12 @@ class Layout extends React.Component {
           </Container>
         </Navbar>
         <Row noGutters>
-          <Col xs={1}>
+          <Col className="coll-hidden" xs={1}>
             <Sidebar />
           </Col>
-          <Col xs={10}>
+          <Col xs={12} lg={10}>
             <Container
+              fluid
               style={{
                 paddingTop: "1em",
                 height: "700px"
