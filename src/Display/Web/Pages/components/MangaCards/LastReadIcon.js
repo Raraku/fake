@@ -14,13 +14,13 @@ function MangaIcon(props) {
     B: "brown"
   };
   return (
-    <Col className="manga-card" xs={props.col_size}>
+    <Col className="manga-card" xs={12} lg={props.col_size}>
       <Card
         as={Link}
         to={`/manga/${props.alias}/`}
         style={{ flexDirection: "row" }}
       >
-        <div className="w-25">
+        <div className="w-25 my-div">
           <div style={{ height: "100%" }}>
             <Image
               fluid
@@ -50,7 +50,7 @@ function MangaIcon(props) {
             )}
           </div>
         </div>
-        <Card className="w-75">
+        <Card className="w-75 my-div">
           <Card.Body>
             <Card.Title>
               {props.loading ? (

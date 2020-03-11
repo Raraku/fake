@@ -20,9 +20,9 @@ function MangaIcon(props) {
   };
   console.log(props.is_favorite);
   return (
-    <Col className="manga-card-single" xs={props.col_size}>
+    <Col className="manga-card-single" xs={12} lg={props.col_size}>
       <Card className="special-card" style={{ flexDirection: "row" }}>
-        <div className="w-25">
+        <div className="w-25 my-div">
           <div style={{ height: "100%" }}>
             <Image
               fluid
@@ -52,7 +52,7 @@ function MangaIcon(props) {
             )}
           </div>
         </div>
-        <Card className="special-card" className="w-75">
+        <Card className="special-card" className="w-75 my-div">
           <Card.Body>
             <Card.Title>
               {props.loading ? (

@@ -23,13 +23,13 @@ function LastReadMangaIcon(props) {
   }, [show]);
 
   return (
-    <Col className="manga-card" xs={6}>
+    <Col className="manga-card" xs={12} lg={6}>
       <Card
         as={Link}
         to={`/manga/${props.alias}/`}
         style={{ flexDirection: "row" }}
       >
-        <div className="w-25">
+        <div className="w-25 my-div">
           <div style={{ height: "100%" }}>
             <Image
               fluid
@@ -41,7 +41,7 @@ function LastReadMangaIcon(props) {
               }}
               hidden={show}
               src={props.image_url}
-              style={{ width: "100%" }}
+              className="latest-image"
               alt="manga-image"
               referrerPolicy="no-referrer"
               loading="lazy"
@@ -59,7 +59,7 @@ function LastReadMangaIcon(props) {
             )}
           </div>
         </div>
-        <Card className="w-75">
+        <Card className="w-75 my-div">
           <Card.Body>
             <Card.Title>
               {props.loading ? (

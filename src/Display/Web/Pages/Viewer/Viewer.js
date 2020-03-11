@@ -5,6 +5,7 @@ import { Navbar, Button, Nav } from "react-bootstrap";
 import { Dropdown } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { Modal } from "react-bootstrap";
 
 const Viewer = (props) => {
   const [pages, setPages] = useState([]);
@@ -14,15 +15,20 @@ const Viewer = (props) => {
   const [lastChapter, setLastChapter] = useState(false);
   const [allChapters, setAllChapters] = useState([]);
   const getMangaChapters = () => {
-    return axios.get(`/manga/${props.match.params.manga}/get_chapter/`, {
-      params: {
-        number: props.match.params.chapter
+    return axios.get(
+      `/manga/${props.match.params.manga}/get_manganelo_chapter/`,
+      {
+        params: {
+          number: props.match.params.chapter
+        }
       }
-    });
+    );
   };
 
   const getChapterPages = () => {
-    return axios.get(`/manga/${props.match.params.manga}/get_chapters/`);
+    return axios.get(
+      `/manga/${props.match.params.manga}/get_manganelo_chapters/`
+    );
   };
   useEffect(() => {
     setPages([]);
@@ -100,79 +106,94 @@ const Viewer = (props) => {
             }`}
           />
         </Helmet>
-        <Navbar
-          bg="dark"
-          variant="dark"
-          className="text-center"
-          expand={false}
-          fixed="top"
-        >
-          <Dropdown
+        <Modal className="manga-modal" show={true}>
+          <Navbar
+            show
+            bg="dark"
+            variant="dark"
             className="text-center"
-            pointing
-            loading={loading}
-            selection
-            fluid
-            text={
-              title != null
-                ? `Chapter ${number} : ${title}`
-                : `Chapter ${number}`
-            }
+            expand={false}
+            fixed="top"
           >
-            <Dropdown.Menu>
-              {allChapters.map((chapter) => (
-                <Dropdown.Item
-                  className="text-center"
-                  key={chapter.number}
-                  as={Link}
-                  to={`/manga/${props.match.params.manga}/${chapter.number}/`}
-                  active={chapter.number == number}
-                  text={
-                    chapter.title != null
-                      ? `Chapter ${chapter.number} : ${chapter.title}`
-                      : `Chapter ${chapter.number}`
-                  }
-                />
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-          <br />
-          <div className="chapter-page-container">
-            <Nav.Item className="text-white text-center" hidden={!lastChapter}>
-              Oops, last chapter. Stay tuned, we'll inform you when the next
-              chapter is released
-            </Nav.Item>
-          </div>
-          <div className="chapter-page-container">
-            <Button onClick={handlecounterincrease} variant="outline-secondary">
-              +
-            </Button>
-            <Button onClick={handlecounterdecrease} variant="outline-secondary">
-              -
-            </Button>
-          </div>
-        </Navbar>
+            <Dropdown
+              className="text-center"
+              pointing
+              loading={loading}
+              selection
+              fluid
+              text={
+                title != null
+                  ? `Chapter ${number} : ${title}`
+                  : `Chapter ${number}`
+              }
+            >
+              <Dropdown.Menu>
+                {allChapters.map((chapter) => (
+                  <Dropdown.Item
+                    className="text-center"
+                    key={chapter.number}
+                    as={Link}
+                    to={`/manga/${props.match.params.manga}/${chapter.number}/`}
+                    active={chapter.number == number}
+                    text={
+                      chapter.title != null
+                        ? `Chapter ${chapter.number} : ${chapter.title}`
+                        : `Chapter ${chapter.number}`
+                    }
+                  />
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+            <br />
+          </Navbar>
 
-        <div style={{ marginTop: "100px" }} className="image-container">
-          {pages.map((number) => (
-            <div>
-              <div className="text-center">
-                <img
-                  style={{ marginLeft: "auto", marginRight: "auto" }}
-                  width="80%"
-                  src={number}
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                  }}
-                />
-                <br />
-                <br />
+          <div style={{ marginTop: "100px" }} className="image-container">
+            {pages.map((number) => (
+              <div>
+                <div className="text-center">
+                  <img
+                    style={{ marginLeft: "auto", marginRight: "auto" }}
+                    width="80%"
+                    src={number}
+                    className="manga-display"
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                    }}
+                  />
+                  <br />
+                  <br />
+                </div>
               </div>
+            ))}
+            <div className="chapter-page-container">
+              <Nav.Item
+                className="text-white text-center"
+                hidden={!lastChapter}
+              >
+                Oops, last chapter. Stay tuned, we'll inform you when the next
+                chapter is released
+              </Nav.Item>
             </div>
-          ))}
-        </div>
+            <div className="chapter-page-container">
+              <Button
+                onClick={handlecounterdecrease}
+                variant="outline-secondary"
+              >
+                -
+              </Button>
+              <Button
+                onClick={handlecounterincrease}
+                variant="outline-secondary"
+              >
+                +
+              </Button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </Modal>
       </React.Fragment>
     );
   } else {

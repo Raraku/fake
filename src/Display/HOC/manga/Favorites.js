@@ -7,21 +7,28 @@ const getFavorites = (WrappedComponent, props) => {
       super(props);
       this.state = {
         favorites: [],
-        loading: true
+        loading: true,
+        error: ""
       };
     }
     componentDidMount() {
       console.log(this.props);
-      axiosConfig.get(`/usermanga/get_favorites/`).then((res) => {
-        this.setState({ favorites: res.data, loading: false });
-        console.log(res.data);
-      });
+      axiosConfig
+        .get(`/usermanga/get_favorites/`)
+        .then((res) => {
+          this.setState({ favorites: res.data, loading: false });
+          console.log(res.data);
+        })
+        .catch((err) => {
+          this.setState({ error: "Log in to view Favorites", loading: false });
+        });
     }
     render() {
       return (
         <WrappedComponent
           favorites={this.state.favorites}
           loading={this.state.loading}
+          err={this.state.error}
           {...this.props}
         />
       );

@@ -52,35 +52,38 @@ class Layout extends React.Component {
     console.log(this.props);
     return (
       <div>
-        <Navbar variant="dark" className="mynav">
+        <Navbar variant="dark" expand="md" className="mynav">
           <Container>
             <Navbar.Brand as={Link} to="/">
               Elitemanga
             </Navbar.Brand>
-            <Form.Control
-              style={{ marginRight: "0.5em" }}
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-            ></Form.Control>
-            <Button variant="outline-primary" type="Submit">
-              Search
-            </Button>
+            <Navbar.Toggle />
+            <Navbar.Collapse>
+              <Form.Control
+                style={{ marginRight: "0.5em" }}
+                type="text"
+                value={this.state.value}
+                onChange={this.handleChange}
+              ></Form.Control>
+              <Button variant="outline-primary" type="Submit">
+                Search
+              </Button>
 
-            {this.props.isAuthenticated ? (
-              <Nav>
-                <Nav.Link onClick={this.logout}>Logout</Nav.Link>
-              </Nav>
-            ) : (
-              <Nav>
-                <Nav.Link as={Link} to="/login/">
-                  Login
-                </Nav.Link>
-                <Nav.Link as={Link} to="/signup/">
-                  Signup
-                </Nav.Link>
-              </Nav>
-            )}
+              {this.props.isAuthenticated ? (
+                <Nav>
+                  <Nav.Link onClick={this.logout}>Logout</Nav.Link>
+                </Nav>
+              ) : (
+                <Nav>
+                  <Nav.Link as={Link} to="/login/">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/signup/">
+                    Signup
+                  </Nav.Link>
+                </Nav>
+              )}
+            </Navbar.Collapse>
           </Container>
         </Navbar>
         <Row noGutters>

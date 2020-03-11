@@ -32,7 +32,7 @@ function Sidebar() {
   };
 
   return (
-    <Nav className="flex-column">
+    <Nav className="flex-column flex-columna">
       <Nav.Link
         as={Link}
         to="/"

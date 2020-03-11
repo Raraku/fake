@@ -5,7 +5,7 @@
 .mynav {
   background-color: darkgray;
 }
-.flex-column {
+.flex-columna {
   background-color: rgb(190, 183, 183);
   position: fixed;
   padding-left: 0.5em !important;
@@ -107,4 +107,35 @@
 .a {
   text-decoration: none !important;
   color: none !important;
+}
+
+.modal-dialog {
+  max-width: none !important;
+}
+.manga-display {
+  width: 70%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* for mobile phones */
+  body {
+    background-color: lightblue !important;
+  }
+  .flex-columna {
+    display: none !important;
+  }
+  .manga-display {
+    width: 100% !important;
+  }
+  .my-div {
+    display: block !important;
+  }
+}
+.ui.fluid.image,
+.ui.fluid.image img,
+.ui.fluid.image svg,
+.ui.fluid.images,
+.ui.fluid.images img,
+.ui.fluid.images svg {
+  height: 100% !important;
 }

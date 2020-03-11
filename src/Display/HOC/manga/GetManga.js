@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosConfig from "./../axiosConfig";
+import axios from "axios";
 
 export const GetManga = (WrappedComponent, props) => {
   class GetManga extends React.Component {
@@ -11,7 +11,7 @@ export const GetManga = (WrappedComponent, props) => {
       };
     }
     getManga = () => {
-      axiosConfig.get(`/manga/${this.props.match.params.manga}`).then((res) => {
+      axios.get(`/manga/${this.props.match.params.manga}/`).then((res) => {
         this.setState({ manga: res.data, loading: false });
         console.log(this.state.manga);
       });

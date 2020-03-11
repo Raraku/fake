@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosConfig from "./../axiosConfig";
+import axios from "axios";
 
 export const GetMangasInfo = (WrappedComponent, props) => {
   class GetMangaInfo extends React.Component {
@@ -13,7 +13,7 @@ export const GetMangasInfo = (WrappedComponent, props) => {
       };
     }
     getData = (page) => {
-      axiosConfig
+      axios
         .get("/mangainfo/", {
           params: { page: page }
         })

@@ -17,7 +17,7 @@ class ChapterList extends React.Component {
   };
   routeToChapter = (event) => {
     axiosConfig.get(
-      `/usermanga/${this.props.match.params.manga}/add_chapter/`,
+      `/usermanga/${this.props.match.params.manga}/add_manganelo_chapter/`,
       {
         params: {
           chapter_id: event.currentTarget.dataset.id

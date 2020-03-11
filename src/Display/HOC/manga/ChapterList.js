@@ -13,7 +13,7 @@ const getChapters = (WrappedComponent, props) => {
     componentDidMount() {
       console.log(this.props);
       axios
-        .get(`/manga/${this.props.match.params.manga}/get_chapters/`)
+        .get(`/manga/${this.props.match.params.manga}/get_manganelo_chapters/`)
         .then((res) => {
           this.setState({ chapters: res.data, loading: false });
         });
