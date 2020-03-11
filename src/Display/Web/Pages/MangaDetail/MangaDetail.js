@@ -63,7 +63,7 @@ class MangaDetail extends React.Component {
         {this.props.loading != true && (
           <MangaIcon
             col_size={12}
-            detail={true}
+            detail={window.innerWidth < 768}
             myclass="break-manga"
             loading={this.props.loading}
             title={this.props.manga.title}

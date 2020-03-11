@@ -18,14 +18,100 @@ function MangaIcon(props) {
   const add_to_favorites = () => {
     props.add_to_favorites();
   };
+  useEffect(() => {});
   console.log(props.is_favorite);
   console.log(props.detail);
   return (
     <Col className="manga-card-single" xs={12} lg={props.col_size}>
-      <Card className="special-card">
-        {props.detail == true ? (
-          <>
-            <div className="text-center">
+      {props.detail == true ? (
+        <Card className="special-card">
+          <div className="text-center">
+            <Image
+              fluid
+              label={{
+                as: "a",
+                color: color[props.rank],
+                content: `${props.rank}`,
+                ribbon: true
+              }}
+              hidden={show}
+              src={props.image_url}
+              alt="manga-image"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+              onError={(setErrored) => {
+                setShow(true);
+              }}
+              onLoad={() => {
+                setErrored(false);
+              }}
+            />
+            <div>
+              {errored && (
+                <Placeholder style={{ height: "100%", width: "100%" }}>
+                  <Placeholder.Image rectangular />
+                </Placeholder>
+              )}
+            </div>
+          </div>
+          <Card className="special-card" className="my-div">
+            <Card.Body>
+              <Card.Title>
+                {props.loading ? (
+                  <Placeholder>
+                    <Placeholder.Line />
+                  </Placeholder>
+                ) : (
+                  <h3>{props.title}</h3>
+                )}
+              </Card.Title>
+              {props.loading ? (
+                <Placeholder>
+                  <Placeholder.Line />
+                  <Placeholder.Paragraph>
+                    <Placeholder.Line />
+                    <Placeholder.Line />
+                    <Placeholder.Line />
+                  </Placeholder.Paragraph>
+                </Placeholder>
+              ) : (
+                <div>
+                  <Badge variant="danger">{props.rank}</Badge>
+                  <Card.Text>{he.decode(props.description)}</Card.Text>
+                  {props.is_favorite != undefined && (
+                    <div className="text-right">
+                      {props.is_favorite ? (
+                        <BookmarkIcon
+                          onClick={add_to_favorites}
+                          fontSize="large"
+                        />
+                      ) : (
+                        <BookmarkBorderIcon
+                          onClick={add_to_favorites}
+                          fontSize="large"
+                        />
+                      )}
+                    </div>
+                  )}
+                  <Card.Subtitle className="text-muted">
+                    {props.author}
+                  </Card.Subtitle>
+                  {props.last_read && (
+                    <footer className="blockquote-footer">
+                      {" "}
+                      last read {props.last_read}
+                    </footer>
+                  )}
+                </div>
+              )}
+            </Card.Body>
+          </Card>
+        </Card>
+      ) : (
+        <Card className="special-card" style={{ flexDirection: "row" }}>
+          >
+          <div className="w-25">
+            <div style={{ height: "100%" }}>
               <Image
                 fluid
                 label={{
@@ -36,6 +122,7 @@ function MangaIcon(props) {
                 }}
                 hidden={show}
                 src={props.image_url}
+                style={{ width: "100%" }}
                 alt="manga-image"
                 referrerPolicy="no-referrer"
                 loading="lazy"
@@ -46,154 +133,67 @@ function MangaIcon(props) {
                   setErrored(false);
                 }}
               />
-              <div>
-                {errored && (
-                  <Placeholder style={{ height: "100%", width: "100%" }}>
-                    <Placeholder.Image rectangular />
-                  </Placeholder>
-                )}
-              </div>
+              {errored && (
+                <Placeholder style={{ height: "100%", width: "100%" }}>
+                  <Placeholder.Image rectangular />
+                </Placeholder>
+              )}
             </div>
-            <Card className="special-card" className="my-div">
-              <Card.Body>
-                <Card.Title>
-                  {props.loading ? (
-                    <Placeholder>
-                      <Placeholder.Line />
-                    </Placeholder>
-                  ) : (
-                    <h3>{props.title}</h3>
-                  )}
-                </Card.Title>
+          </div>
+          <Card className="special-card" className="w-75">
+            <Card.Body>
+              <Card.Title>
                 {props.loading ? (
                   <Placeholder>
                     <Placeholder.Line />
-                    <Placeholder.Paragraph>
-                      <Placeholder.Line />
-                      <Placeholder.Line />
-                      <Placeholder.Line />
-                    </Placeholder.Paragraph>
                   </Placeholder>
                 ) : (
-                  <div>
-                    <Badge variant="danger">{props.rank}</Badge>
-                    <Card.Text>{he.decode(props.description)}</Card.Text>
-                    {props.is_favorite != undefined && (
-                      <div className="text-right">
-                        {props.is_favorite ? (
-                          <BookmarkIcon
-                            onClick={add_to_favorites}
-                            fontSize="large"
-                          />
-                        ) : (
-                          <BookmarkBorderIcon
-                            onClick={add_to_favorites}
-                            fontSize="large"
-                          />
-                        )}
-                      </div>
-                    )}
-                    <Card.Subtitle className="text-muted">
-                      {props.author}
-                    </Card.Subtitle>
-                    {props.last_read && (
-                      <footer className="blockquote-footer">
-                        {" "}
-                        last read {props.last_read}
-                      </footer>
-                    )}
-                  </div>
+                  <h3>{props.title}</h3>
                 )}
-              </Card.Body>
-            </Card>
-          </>
-        ) : (
-          <>
-            <div className={`w-25 my-div ${props.myclass}`}>
-              <div style={{ height: "100%" }}>
-                <Image
-                  fluid
-                  label={{
-                    as: "a",
-                    color: color[props.rank],
-                    content: `${props.rank}`,
-                    ribbon: true
-                  }}
-                  hidden={show}
-                  src={props.image_url}
-                  style={{ width: "100%" }}
-                  alt="manga-image"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                  onError={(setErrored) => {
-                    setShow(true);
-                  }}
-                  onLoad={() => {
-                    setErrored(false);
-                  }}
-                />
-                {errored && (
-                  <Placeholder style={{ height: "100%", width: "100%" }}>
-                    <Placeholder.Image rectangular />
-                  </Placeholder>
-                )}
-              </div>
-            </div>
-            <Card className="special-card" className="w-75 my-div">
-              <Card.Body>
-                <Card.Title>
-                  {props.loading ? (
-                    <Placeholder>
-                      <Placeholder.Line />
-                    </Placeholder>
-                  ) : (
-                    <h3>{props.title}</h3>
-                  )}
-                </Card.Title>
-                {props.loading ? (
-                  <Placeholder>
+              </Card.Title>
+              {props.loading ? (
+                <Placeholder>
+                  <Placeholder.Line />
+                  <Placeholder.Paragraph>
                     <Placeholder.Line />
-                    <Placeholder.Paragraph>
-                      <Placeholder.Line />
-                      <Placeholder.Line />
-                      <Placeholder.Line />
-                    </Placeholder.Paragraph>
-                  </Placeholder>
-                ) : (
-                  <div>
-                    <Badge variant="danger">{props.rank}</Badge>
-                    <Card.Text>{he.decode(props.description)}</Card.Text>
-                    {props.is_favorite != undefined && (
-                      <div className="text-right">
-                        {props.is_favorite ? (
-                          <BookmarkIcon
-                            onClick={add_to_favorites}
-                            fontSize="large"
-                          />
-                        ) : (
-                          <BookmarkBorderIcon
-                            onClick={add_to_favorites}
-                            fontSize="large"
-                          />
-                        )}
-                      </div>
-                    )}
-                    <Card.Subtitle className="text-muted">
-                      {props.author}
-                    </Card.Subtitle>
-                    {props.last_read && (
-                      <footer className="blockquote-footer">
-                        {" "}
-                        last read {props.last_read}
-                      </footer>
-                    )}
-                  </div>
-                )}
-              </Card.Body>
-            </Card>
-          </>
-        )}
-      </Card>
+                    <Placeholder.Line />
+                    <Placeholder.Line />
+                  </Placeholder.Paragraph>
+                </Placeholder>
+              ) : (
+                <div>
+                  <Badge variant="danger">{props.rank}</Badge>
+                  <Card.Text>{he.decode(props.description)}</Card.Text>
+                  {props.is_favorite != undefined && (
+                    <div className="text-right">
+                      {props.is_favorite ? (
+                        <BookmarkIcon
+                          onClick={add_to_favorites}
+                          fontSize="large"
+                        />
+                      ) : (
+                        <BookmarkBorderIcon
+                          onClick={add_to_favorites}
+                          fontSize="large"
+                        />
+                      )}
+                    </div>
+                  )}
+                  <Card.Subtitle className="text-muted">
+                    {props.author}
+                  </Card.Subtitle>
+                  {props.last_read && (
+                    <footer className="blockquote-footer">
+                      {" "}
+                      last read {props.last_read}
+                    </footer>
+                  )}
+                </div>
+              )}
+            </Card.Body>
+          </Card>
+        </Card>
+      )}
     </Col>
   );
 }
