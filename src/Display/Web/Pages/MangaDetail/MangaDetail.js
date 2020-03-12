@@ -67,6 +67,7 @@ class MangaDetail extends React.Component {
             myclass="break-manga"
             loading={this.props.loading}
             title={this.props.manga.title}
+            alias={this.props.manga.alias}
             author={this.props.manga.author}
             rank={this.props.manga.rank}
             add_to_favorites={this.add_to_favorites}
