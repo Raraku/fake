@@ -15,7 +15,7 @@ class HotManga extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get("/mangainfo/").then((res) => {
+    axios.get("/mangainfo/get_top_30/").then((res) => {
       this.setState({ manga: res.data, loading: false });
     });
   }
