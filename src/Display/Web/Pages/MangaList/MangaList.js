@@ -27,6 +27,7 @@ class MangaList extends React.Component {
               col_size={6}
               loading={this.props.loading}
               title={manga.title}
+              alias={manga.alias}
               author={manga.author}
               rank={manga.rank}
               image_url={manga.image_url}
