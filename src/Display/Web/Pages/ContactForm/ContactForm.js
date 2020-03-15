@@ -41,7 +41,7 @@ class ContactForm extends React.Component {
     return (
       <Paper className="p-5 a-paper">
         <Helmet>
-          <title>Elitemanga - Contact us</title>
+          <title>Contact Us - EliteManga</title>
           <meta
             name="description"
             content="Contact Us- We are always willing to hear from you."

@@ -7,7 +7,8 @@ import {
   Col,
   Form,
   Nav,
-  Button
+  Button,
+  Alert
 } from "react-bootstrap";
 import Sidebar from "./Left";
 import SearchBar from "./../Pages/Search/Searchbar";
@@ -86,6 +87,11 @@ class Layout extends React.Component {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <Alert variant="danger" className="text-center">
+          This website is under active development. Disclaimer, this is not a
+          scanlator or aggregator website. The remodeled version will be
+          uploaded in coming weeks. Stay tuned.
+        </Alert>
         <Row noGutters>
           <Col className="coll-hidden" xs={1}>
             <Sidebar />

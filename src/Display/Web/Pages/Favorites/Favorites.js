@@ -16,7 +16,7 @@ class Favorites extends React.Component {
       return (
         <div>
           <Helmet>
-            <title>Favorites</title>
+            <title>Favorites - EliteManga</title>
             <meta
               name="description"
               content="Your favorite Mangas, all in one place. Accessible from any device"

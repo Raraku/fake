@@ -39,7 +39,7 @@ const RandomManga = (props) => {
   return (
     <div>
       <Helmet>
-        <title>Elitemanga - Random Manga</title>
+        <title>Random Manga - EliteManga</title>
         <meta
           name="description"
           content="Don't know what to read next? Click the button and our systems will

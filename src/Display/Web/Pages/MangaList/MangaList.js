@@ -15,7 +15,7 @@ class MangaList extends React.Component {
     return (
       <Paper>
         <Helmet>
-          <title>Elitemanga - All Manga</title>
+          <title>All Manga - EliteManga</title>
           <meta name="description" content="All Manga" />
         </Helmet>
         <Divider horizontal>

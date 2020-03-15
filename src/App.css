@@ -2,8 +2,12 @@
   border-style: solid;
   border-width: 1px;
 } */
+body {
+  background-color: rgb(10, 104, 10) !important;
+  color: white !important;
+}
 .mynav {
-  background-color: darkgray;
+  background-color: black;
 }
 .flex-columna {
   background-color: rgb(190, 183, 183);
@@ -58,6 +62,7 @@
 .MuiPaper-root {
   padding: 2em 0.5em !important;
 }
+
 .manga-card-single {
   font-size: 1.5em;
 }
@@ -118,9 +123,7 @@
 
 @media only screen and (max-width: 768px) {
   /* for mobile phones */
-  body {
-    background-color: lightblue !important;
-  }
+
   .flex-columna {
     display: none !important;
   }
