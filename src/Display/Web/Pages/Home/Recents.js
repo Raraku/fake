@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Button } from "react-bootstrap";
 import MangaIcon from "../components/MangaCards/LastReadIcon";
 import { Paper } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import axiosConfig from "./../../../HOC/axiosConfig";
+import { Divider } from "semantic-ui-react";
 
 const Recents = () => {
   const [Manga, setManga] = useState([]);
@@ -23,16 +24,11 @@ const Recents = () => {
     <div>
       {!loading && (
         <Paper className="recent-paper">
-          <Row>
-            <Col>
-              <h3>Recently Read...</h3>
-            </Col>
-            <Col>
-              <h4 className="text-right">
-                <Link to="/recently-read/">See more...</Link>
-              </h4>
-            </Col>
-          </Row>
+          <div>
+            <Divider horizontal>
+              <h3>Latest Updates</h3>
+            </Divider>
+          </div>
           <Row>
             {Manga != undefined &&
               Manga.map((manga) => (
@@ -49,6 +45,9 @@ const Recents = () => {
                 />
               ))}
           </Row>
+          <div className="text-right">
+            <Button variant="outline-success">See more</Button>
+          </div>
         </Paper>
       )}
     </div>

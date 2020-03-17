@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { Paper } from "@material-ui/core";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import MangaIcon from "./../components/MangaCards/LastReadIcon";
-import { Loader, Segment } from "semantic-ui-react";
+import { Loader, Segment, Divider } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 class HotManga extends React.Component {
@@ -23,34 +23,33 @@ class HotManga extends React.Component {
     return (
       <Paper className="recent-paper">
         <div>
-          <Row>
-            <Col>
-              <h3>Hot Manga</h3>
-            </Col>
-            <Col>
-              <h4 className="text-right">
-                <Link to="/hot-manga/">See more...</Link>
-              </h4>
-            </Col>
-          </Row>
+          <Divider horizontal>
+            <h3>Hot Manga</h3>
+          </Divider>
         </div>
-
         {!this.state.loading ? (
-          <Row>
-            {this.state.manga.slice(0, 15).map((manga) => (
-              <MangaIcon
-                col_size={6}
-                title={manga.title}
-                loading={this.state.loading}
-                author={manga.author}
-                alias={manga.alias}
-                rank={manga.rank}
-                last_updated={manga.last_updated}
-                image_url={manga.image_url}
-                description={manga.description}
-              />
-            ))}
-          </Row>
+          <div>
+            <Row>
+              {this.state.manga.slice(0, 15).map((manga) => (
+                <MangaIcon
+                  col_size={6}
+                  title={manga.title}
+                  loading={this.state.loading}
+                  author={manga.author}
+                  alias={manga.alias}
+                  rank={manga.rank}
+                  last_updated={manga.last_updated}
+                  image_url={manga.image_url}
+                  description={manga.description}
+                />
+              ))}
+            </Row>
+            <div className="text-right">
+              <Button as={Link} to="/hot-manga/" variant="outline-success">
+                See more
+              </Button>
+            </div>
+          </div>
         ) : (
           <Segment>
             <div style={{ height: "200px" }}>
