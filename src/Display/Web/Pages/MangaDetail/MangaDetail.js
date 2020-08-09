@@ -32,7 +32,7 @@ class MangaDetail extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>{`Elitemanga - ${this.props.manga.title}`}</title>
+          <title>{`${this.props.manga.title} - EliteManga`}</title>
           <meta
             name="description"
             content={`${this.props.manga.description}`}

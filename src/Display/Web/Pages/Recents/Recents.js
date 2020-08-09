@@ -14,7 +14,7 @@ const Recents = (props) => {
   return (
     <Paper className="recent-paper">
       <Helmet>
-        <title>Recently Read</title>
+        <title>Recently Read - EliteManga</title>
         <meta
           name="description"
           content="Your recently read manga, accessible from any device"

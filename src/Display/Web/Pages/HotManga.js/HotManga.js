@@ -24,7 +24,7 @@ class HotManga extends React.Component {
     return (
       <Paper className="recent-paper">
         <Helmet>
-          <title>Elitemanga - Hot Manga</title>
+          <title>Hot Manga- EliteManga</title>
           <meta
             name="description"
             content="The hottest and most popular manga right now"

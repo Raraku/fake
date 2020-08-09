@@ -27,10 +27,12 @@ class Home extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>Elitemanga</title>
+          <title>
+            EliteManga - Find and read the best Manga and Anime online
+          </title>
           <meta
             name="description"
-            content="Read the best manga, selected and ranked by a team of experts from
+            content="Find the best manga and anime. Comprehensively reviewed, selected and ranked by a team of experts from
             the comfort of your devices"
           />
         </Helmet>

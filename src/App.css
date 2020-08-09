@@ -142,6 +142,7 @@ i.search.icon {
 .MuiIconButton-label {
   color: var(--theme-color) !important;
 }
+
 .manga-card-single {
   font-size: 1.5em;
 }
