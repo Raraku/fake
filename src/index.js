@@ -9,15 +9,18 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import authReducer from "./store/reducers/auth";
+import "./mobile.css";
 import "./index.css";
+import "./App.css";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://elitemanga-79e49.appspot.com/";
+axios.defaults.baseURL = "http://127.0.0.1:8000/";
+// axios.defaults.baseURL = "http://192.168.43.127:8000/";
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
 });
 const store = createStore(rootReducer, composeEnhances(applyMiddleware(thunk)));
 

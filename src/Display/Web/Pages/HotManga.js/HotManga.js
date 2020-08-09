@@ -3,7 +3,7 @@ import axios from "axios";
 import { Paper } from "@material-ui/core";
 import { Row, Col } from "react-bootstrap";
 import MangaIcon from "./../components/MangaCards/LastReadIcon";
-import { Loader, Segment } from "semantic-ui-react";
+import { Loader, Segment, CardGroup } from "semantic-ui-react";
 
 import { Helmet } from "react-helmet";
 
@@ -12,11 +12,11 @@ class HotManga extends React.Component {
     super(props);
     this.state = {
       manga: [],
-      loading: true
+      loading: true,
     };
   }
   componentDidMount() {
-    axios.get("/mangainfo/get_top_30/").then((res) => {
+    axios.get("/mangainfo/").then((res) => {
       this.setState({ manga: res.data, loading: false });
     });
   }
@@ -39,10 +39,9 @@ class HotManga extends React.Component {
         </div>
 
         {!this.state.loading ? (
-          <Row>
+          <CardGroup itemsPerRow={7}>
             {this.state.manga.map((manga) => (
               <MangaIcon
-                col_size={6}
                 title={manga.title}
                 loading={this.state.loading}
                 author={manga.author}
@@ -51,9 +50,10 @@ class HotManga extends React.Component {
                 last_updated={manga.last_updated}
                 image_url={manga.image_url}
                 description={manga.description}
+                media_type={manga.media_type}
               />
             ))}
-          </Row>
+          </CardGroup>
         ) : (
           <Segment>
             <div style={{ height: "200px" }}>

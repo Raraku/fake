@@ -1,30 +1,56 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import axiosConfig from "./../../Display/HOC/axiosConfig";
+import { lightTheme, darkTheme } from "./../../Display/Web/Layout/theme";
+
+const applyTheme = (thisTheme) => {
+  console.log(thisTheme);
+  const theme = thisTheme === "light" ? lightTheme : darkTheme;
+  Object.keys(theme).map((key) => {
+    const value = theme[key];
+    document.documentElement.style.setProperty(key, value);
+    console.log("done");
+  });
+};
 
 export const authStart = () => {
   return {
-    type: actionTypes.AUTH_START
+    type: actionTypes.AUTH_START,
+  };
+};
+
+export const setMode = (mode) => {
+  applyTheme(mode);
+  localStorage.setItem("displayMode", mode);
+  return {
+    type: actionTypes.SET_MODE,
+    mode,
   };
 };
 
 export const authSuccess = (token) => {
+  axiosConfig.defaults.headers.common["Authorization"] =
+    "Token " + localStorage.getItem("token");
+  axiosConfig.interceptors.request.use(function (config) {
+    config.headers.Authorization = "Token " + localStorage.getItem("token");
+    return config;
+  });
   return {
     type: actionTypes.AUTH_SUCCESS,
-    token: token
+    token: token,
   };
 };
 
 export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
-    error: error
+    error: error,
   };
 };
 
 export const addManga = () => {
   return {
-    type: actionTypes.ADD_MANGA
+    type: actionTypes.ADD_MANGA,
   };
 };
 
@@ -32,7 +58,7 @@ export const saveManga = (manga) => {
   return {
     type: actionTypes.GET_MANGA,
     manga: manga,
-    mangaLoading: false
+    mangaLoading: false,
   };
 };
 
@@ -40,7 +66,7 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_LOGOUT,
   };
 };
 
@@ -72,7 +98,7 @@ export const authLogin = (email, password) => {
     axios
       .post("/rest-auth/login/", {
         email: email,
-        password: password
+        password: password,
       })
       .then((res) => {
         const token = res.data.key;
@@ -82,8 +108,20 @@ export const authLogin = (email, password) => {
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600));
       })
-      .catch((err) => {
-        dispatch(authFail(err));
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          dispatch(authFail(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          dispatch(authFail(error.request.data));
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          dispatch(authFail("Error", error.message.data));
+        }
       });
   };
 };
@@ -96,7 +134,7 @@ export const authSignup = (username, email, password1, password2) => {
         username: username,
         email: email,
         password1: password1,
-        password2: password2
+        password2: password2,
       })
       .then((res) => {
         const token = res.data.key;
@@ -104,11 +142,36 @@ export const authSignup = (username, email, password1, password2) => {
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
         dispatch(authSuccess(token));
+
         dispatch(checkAuthTimeout(3600));
       })
-      .catch((err) => {
-        dispatch(authFail(err));
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          dispatch(authFail(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          dispatch(authFail(error.request.data));
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          dispatch(authFail("Error", error.message.data));
+        }
+        // dispatch(authFail(err);
       });
+  };
+};
+
+export const checkMode = () => {
+  return (dispatch) => {
+    const mode = localStorage.getItem("displayMode");
+    if (mode === null) {
+      localStorage.setItem("displayMode", "light");
+    } else {
+      dispatch(setMode(mode));
+    }
   };
 };
 

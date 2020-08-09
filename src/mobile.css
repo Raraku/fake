@@ -1,0 +1,246 @@
+:root {
+  /* --theme-color: #01258a71; */
+  --theme-color: teal;
+}
+button:focus {
+  outline: none !important;
+}
+@media only screen and (min-width: 768px) {
+  .mobile {
+    display: none !important;
+  }
+  .ui.cards.excluded.two > .ui.card {
+    width: calc(12.5% - 1em);
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-size: 1em;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .vanish {
+    display: none !important;
+  }
+  #my-cont > .ui.segment {
+    min-height: calc(100vh - 4.375rem);
+    padding-bottom: 1em !important;
+  }
+  #s-col {
+    padding-right: 0;
+  }
+  #great-row {
+    border: none;
+  }
+  #s-col > .left-rand {
+    height: 50vh;
+  }
+  /* #my-cont > div > div.nav-main > div > a,
+  #my-cont > div > div.nav-main > div > button {
+    color: var(--theme-color);
+  } */
+  #great-row .right-rand {
+    padding-top: 1.5em;
+  }
+  h3.ui.header {
+    font-size: 1.1rem !important;
+  }
+  #cont-1 {
+    padding-bottom: 3em;
+  }
+  .ui.statistic.aii {
+    margin: 0 0 1em 0 !important;
+  }
+  .MuiDialog-paper {
+    width: 100vw;
+    height: 100vh;
+  }
+  .eight.ui.cards > .card > .image > img {
+    height: 210px !important;
+  }
+  #my-cont {
+    height: auto !important;
+  }
+  .ui.cards.excluded.two {
+    flex-wrap: wrap !important;
+  }
+  .ui.cards.excluded.two img[alt="manga-image"] {
+    height: 230px !important;
+  }
+  .MuiToolbar-root {
+    min-height: fit-content !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .MuiFormControl-root,
+  #search-bar {
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+  }
+  .ui.segment.mt-2 {
+    margin-top: 0 !important;
+  }
+  .ui.six.cards {
+    justify-content: inherit;
+  }
+  .ask,
+  .ask-b {
+    margin-left: auto;
+  }
+  .MuiAppBar-root {
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  .appbar,
+  .appbar-topography,
+  .appbar-title {
+    color: var(--theme-color);
+  }
+  a {
+    text-decoration: none !important;
+    color: inherit;
+  }
+  .mobile {
+    display: "";
+  }
+  .manga-card-single {
+    font-size: 1.25em;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  /* for mobile phones */
+  div#my-cont {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  #a-form {
+    width: 100% !important;
+  }
+
+  .flex-columna {
+    display: none !important;
+  }
+  .manga-display {
+    width: 100% !important;
+  }
+  .my-div {
+    display: block !important;
+  }
+  .a-card-image {
+    width: 100% !important;
+    text-align: center;
+  }
+  .a2-card-image {
+    width: 40vw !important;
+    height: 54vw !important;
+    display: inline-block;
+    align-self: center;
+  }
+
+  .a-card-content {
+    width: 100% !important;
+  }
+  #detail-card {
+    flex-direction: column !important;
+  }
+  .switch1 {
+    display: none;
+  }
+  .switch0 {
+    display: block !important;
+  }
+  .wrapper2 {
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+  }
+  .MuiBottomNavigationAction-label {
+    white-space: nowrap;
+  }
+  .ui.placeholder {
+    animation: none;
+  }
+  .ui.card.mobile-card {
+    margin-bottom: 0.5em !important ;
+  }
+  .rev-meta,
+  .rev-meta-b {
+    position: relative;
+    margin-top: 1rem;
+  }
+  .rev-content {
+    font-size: 1em;
+  }
+  .change {
+    margin-right: 1em;
+  }
+  div.container#my-cont {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: initial;
+  }
+  .review-div {
+    width: 100%;
+  }
+  .ui.comments .comment .metadata.rev-meta-b {
+    width: 100%;
+    font-size: 0.875em !important;
+  }
+  .ui.cards:not(.excluded) {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    flex-wrap: nowrap !important;
+    white-space: nowrap;
+  }
+  .ui.cards {
+    flex-wrap: nowrap !important;
+  }
+
+  .content {
+    overflow: hidden;
+  }
+  :root {
+    font-size: calc(1vw + 0.6em);
+  }
+  #cont-1 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .dive {
+    align-items: center;
+    align-self: center;
+    width: 100% !important;
+
+    display: table;
+    white-space: nowrap;
+    height: auto;
+    margin: "";
+    line-height: 1;
+    text-align: center;
+  }
+  .dive:after,
+  .dive:before {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAACCAYAAACuTHuKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1OThBRDY4OUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1OThBRDY4QUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU5OEFENjg3Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU5OEFENjg4Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+VU513gAAADVJREFUeNrs0DENACAQBDBIWLGBJQby/mUcJn5sJXQmOQMAAAAAAJqt+2prAAAAAACg2xdgANk6BEVuJgyMAAAAAElFTkSuQmCC);
+  }
+  .dive:before {
+    background-position: right 1em top 50%;
+  }
+  .dive:after {
+    background-position: left 1em top 50%;
+  }
+  .dive:after,
+  .dive:before {
+    content: "";
+    display: table-cell;
+    position: relative;
+    top: 50%;
+    width: 50%;
+    background-repeat: no-repeat;
+  }
+  .hero.jumbotron {
+    display: none;
+  }
+  .ui.secondary.pointing.menu .item {
+    padding: 0.85714286em 0.8em !important;
+  }
+}

@@ -1,3 +1,93 @@
+:root {
+  --color-surface: #fff;
+  --color-solid: black;
+  color: var(--color-solid);
+  --background: white;
+  --footer: none;
+  --tab-background: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+}
+/* //Themeing */
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
+  color: var(--color-solid);
+}
+.ui.cards a.card:hover,
+.ui.link.card:hover,
+.ui.link.cards .card:hover,
+a.ui.card:hover {
+  cursor: pointer;
+  z-index: 5;
+  background: var(--color-surface);
+  border: none;
+  box-shadow: 0 1px 3px 0 #bcbdbd, 0 0 0 1px #d4d4d5;
+  transform: translateY(-3px);
+}
+.ui.items > .item > .content > a.header,
+.list-time,
+.list-excerpt,
+.list-item-title,
+.list-body,
+.accordion.ui.fluid.styled,
+.accordion.ui.fluid.styled > div.title,
+.font-review,
+.statistic > .label,
+.list-forgotten,
+.chameleon {
+  color: var(--color-solid) !important;
+}
+
+.ui.card,
+.ui.cards > .card {
+  background: var(--color-surface);
+  color: var(--color-solid);
+}
 body {
-  background-color: #eee;
+  background-color: var(--background);
+  /* background-image: url("back.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; */
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px !important;
+}
+.ui.segment {
+  border: none !important;
+  background-color: var(--color-surface);
+}
+.card {
+  background-color: var(--color-surface);
+}
+
+.hero {
+  background-image: url("back.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.definition,
+.accordion.ui.fluid.styled {
+  background-color: var(--color-surface) !important;
+}
+/* .definition,*/
+.ui.fluid.pointing.vertical.menu,
+/* .accordion.ui.fluid.styled, */
+.MuiPaper-root,
+.ui.attached.segment > .ui.segment,
+.list-segment {
+  background-color: var(--color-surface) !important;
+  box-shadow: var(--tab-background) !important;
+}
+.MuiPaper-root {
+  padding-left: 1.3em !important;
+  padding-right: 1.3em !important;
+}
+a.ui.card {
+  box-shadow: none !important;
+}
+.footer-nav {
+  box-shadow: var(--footer);
 }

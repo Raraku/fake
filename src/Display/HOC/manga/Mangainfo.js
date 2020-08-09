@@ -9,25 +9,51 @@ export const GetMangasInfo = (WrappedComponent, props) => {
         manga: [],
         loading: true,
         count: null,
-        page: 1
+        page: 1,
+        type: this.props.type,
       };
     }
-    getData = (page) => {
+    getData = (page, type, tags = []) => {
+      if (this.state.type != type) {
+        this.setState({ type: type });
+      }
+      var link = null;
+      console.log(type);
+      switch (type) {
+        case 0:
+          link = "/mangainfo/";
+          break;
+        case 1:
+          link = "/animeinfo/";
+          break;
+        case 2:
+          link = "/mixedinfo/";
+          break;
+        default:
+          link = "/mixedinfo/";
+      }
+      if (tags.length > 0) {
+        link = link + "filter_by_tags/";
+      }
+      console.log(link);
       axios
-        .get("/mangainfo/", {
-          params: { page: page }
+        .get(link, {
+          params: { page: page, page_size: this.props.page_size, tags: tags },
         })
         .then((res) => {
           this.setState({
             manga: res.data.results,
             count: res.data.count,
-            loading: false
+            loading: false,
+            page: page,
           });
           console.log(this.state.manga);
         });
     };
+
     componentDidMount() {
-      this.getData(this.state.page);
+      this.getData(this.state.page, this.state.type);
+      console.log(this.state.type);
     }
 
     loadNext = () => {
@@ -39,9 +65,10 @@ export const GetMangasInfo = (WrappedComponent, props) => {
       }
     };
     setPage = (page) => {
-      this.getData(page);
+      this.getData(page, this.state.type);
     };
     render() {
+      console.log(this.state.type);
       return (
         <WrappedComponent
           loading={this.state.loading}
@@ -49,10 +76,16 @@ export const GetMangasInfo = (WrappedComponent, props) => {
           count={this.state.count}
           page={this.state.page}
           setPage={this.setPage}
+          changeMedia={this.getData}
+          type={this.state.type}
           {...props}
         />
       );
     }
   }
+  GetMangaInfo.defaultProps = {
+    type: 0,
+    page_size: 24,
+  };
   return GetMangaInfo;
 };

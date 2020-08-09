@@ -6,3 +6,5 @@ export const ADD_MANGA = "ADD_MANGA";
 export const GET_MANGA = "GET_MANGA";
 export const GET_LOAD = "GET_LOAD";
 export const SET_LOAD = "SET_LOAD";
+export const CHECK_MODE = "CHECK_MODE";
+export const SET_MODE = "SET_MODE";

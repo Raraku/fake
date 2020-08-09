@@ -7,27 +7,37 @@ export const GetManga = (WrappedComponent, props) => {
       super(props);
       this.state = {
         manga: [],
-        loading: true
+        loading: true,
       };
     }
     getManga = () => {
-      axios.get(`/manga/${this.props.match.params.manga}/`).then((res) => {
-        this.setState({ manga: res.data, loading: false });
-        console.log(this.state.manga);
-      });
+      if (this.props.type == "1") {
+        axios.get(`/anime/${this.props.match.params.manga}/`).then((res) => {
+          this.setState({ manga: res.data, loading: false });
+        });
+      } else {
+        axios.get(`/manga/${this.props.match.params.manga}/`).then((res) => {
+          this.setState({ manga: res.data, loading: false });
+        });
+      }
     };
+
     componentDidMount() {
       this.getManga();
     }
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
       if (this.state.manga == []) {
         console.log("work");
         this.getManga();
       }
+      if (prevProps.location.key !== this.props.location.key) {
+        this.getManga();
+        window.scrollTo(0, 0);
+      }
     }
 
     render() {
-      console.log(this.props.match.params.manga);
+      console.log(this.props);
       return (
         <WrappedComponent
           loading={this.state.loading}

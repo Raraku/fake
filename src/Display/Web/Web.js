@@ -8,7 +8,7 @@ class Web extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      switch: 0
+      switch: 0,
     };
   }
   changeSwitchA = () => {

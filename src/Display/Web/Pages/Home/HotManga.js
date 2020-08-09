@@ -1,9 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { Paper } from "@material-ui/core";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
 import MangaIcon from "./../components/MangaCards/LastReadIcon";
-import { Loader, Segment } from "semantic-ui-react";
+import PlaceholderCard from "./../components/Placeholders/PlaceholderCard";
+import {
+  Loader,
+  Segment,
+  Divider,
+  Header,
+  Icon,
+  CardGroup,
+} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 class HotManga extends React.Component {
@@ -11,56 +18,47 @@ class HotManga extends React.Component {
     super(props);
     this.state = {
       manga: [],
-      loading: true
+      loading: true,
     };
   }
   componentDidMount() {
-    axios.get("/mangainfo/get_top_30/").then((res) => {
+    axios.get("/mangainfo/get_weekly_manga/").then((res) => {
       this.setState({ manga: res.data, loading: false });
     });
   }
   render() {
     return (
-      <Paper className="recent-paper">
-        <div>
-          <Row>
-            <Col>
-              <h3>Hot Manga</h3>
-            </Col>
-            <Col>
-              <h4 className="text-right">
-                <Link to="/hot-manga/">See more...</Link>
-              </h4>
-            </Col>
-          </Row>
-        </div>
-
-        {!this.state.loading ? (
-          <Row>
-            {this.state.manga.slice(0, 15).map((manga) => (
-              <MangaIcon
-                col_size={6}
-                title={manga.title}
-                loading={this.state.loading}
-                author={manga.author}
-                alias={manga.alias}
-                rank={manga.rank}
-                last_updated={manga.last_updated}
-                image_url={manga.image_url}
-                description={manga.description}
-              />
-            ))}
-          </Row>
-        ) : (
-          <Segment>
-            <div style={{ height: "200px" }}>
-              <Loader active size="big">
-                Loading...
-              </Loader>
-            </div>
-          </Segment>
-        )}
-      </Paper>
+      <Card>
+        <Card.Header className="landing">
+          <Divider horizontal>
+            <Header className="need-theme" as="h3">
+              <Icon name="trophy" />
+              Trending Manga this week
+            </Header>
+          </Divider>
+        </Card.Header>
+        <Card.Body className="landing-card">
+          <div>
+            <CardGroup itemsPerRow={6}>
+              {!this.state.loading
+                ? this.state.manga.map((manga) => (
+                    <MangaIcon
+                      title={manga.title}
+                      loading={this.state.loading}
+                      author={manga.author}
+                      alias={manga.alias}
+                      rank={manga.rank}
+                      last_updated={manga.last_updated}
+                      image_url={manga.image_url}
+                      description={manga.description}
+                      media_type={manga.media_type}
+                    />
+                  ))
+                : [0, 1, 2, 3, 4, 5].map((e, i) => <PlaceholderCard />)}
+            </CardGroup>
+          </div>
+        </Card.Body>
+      </Card>
     );
   }
 }

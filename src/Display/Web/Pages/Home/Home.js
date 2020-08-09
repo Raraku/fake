@@ -1,16 +1,26 @@
 //Manga api
 //Recents
 import React from "react";
-import Latest from "./Latest";
-import Recents from "./Recents";
+import LatestAnime from "./LatestAnime";
+import LatestManga from "./LatestManga";
 import HotManga from "./HotManga";
 import { Helmet } from "react-helmet";
+import { Col, Card } from "react-bootstrap";
+import Sidebar from "./Left";
+import { Row } from "react-bootstrap";
+
+import HotAnime from "./HotAnime";
+import { Segment } from "semantic-ui-react";
+import Unreleased from "./Unreleased";
+import Hero from "./Hero";
+import Lists from "./Lists";
+import Heroes from "./Heroes";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      state: ""
+      state: "",
     };
   }
   render() {
@@ -24,12 +34,50 @@ class Home extends React.Component {
             the comfort of your devices"
           />
         </Helmet>
-        <Recents />
-        <br />
-        <Latest />
-        <br />
-        <HotManga />
-        <br />
+
+        <Row noGutters>
+          <Col xs={12} md={9}>
+            <Segment className="p-0 colorless">
+              <HotManga />
+
+              <HotAnime />
+            </Segment>
+          </Col>
+          <Col xs={12} md={3}>
+            <Segment className="p-0 colorless">
+              <Lists />
+            </Segment>
+          </Col>
+        </Row>
+
+        <Hero />
+
+        <Row noGutters>
+          <Col
+            className="pr-1"
+            xs={{ order: 1, span: 12 }}
+            md={{ order: 1, span: 9 }}
+          >
+            <Segment className="p-0">
+              <LatestAnime type="1" />
+              <LatestManga type="0" />
+              <Heroes />
+            </Segment>
+          </Col>
+          <Col
+            className="pl-0"
+            xs={{ order: 1, span: 12 }}
+            md={{ order: 2, span: 3 }}
+          >
+            <Segment className="p-0">
+              <Unreleased />
+              {/*Top Manga of all Time*/}
+              <Sidebar type="0" />
+              {/*Top Anime of all Time*/}
+              <Sidebar type="1" />
+            </Segment>
+          </Col>
+        </Row>
       </div>
     );
   }

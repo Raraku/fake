@@ -3,48 +3,69 @@ import { updateObject } from "../utility";
 
 const initialState = {
   token: null,
-  error: null,
+  error: {
+    username: "",
+    email: "",
+    password1: "",
+    non_field_errors: "",
+  },
   mangaLoading: true,
   manga: [],
-  loading: true
+  mode: "light",
+  loading: true,
 };
 
 const authStart = (state, action) => {
   return updateObject(state, {
-    error: null,
-    loading: true
+    error: {
+      username: "",
+      email: "",
+      password1: "",
+      non_field_errors: "",
+    },
+    loading: true,
   });
 };
 
 const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
-    error: null,
-    loading: false
+    error: {
+      username: "",
+      email: "",
+      password1: "",
+      non_field_errors: "",
+    },
+    loading: false,
   });
 };
 
 const authFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false
+    loading: false,
   });
 };
 
 const authLogout = (state, action) => {
   return updateObject(state, {
-    token: null
+    token: null,
   });
 };
 const addManga = (state, action) => {
   return updateObject(state, {
-    manga: [...state.manga, action.manga]
+    manga: [...state.manga, action.manga],
   });
 };
 const getManga = (state, action) => {
   return updateObject(state, {
     manga: action.manga,
-    mangaLoading: action.mangaLoading
+    mangaLoading: action.mangaLoading,
+  });
+};
+const setMode = (state, action) => {
+  return updateObject(state, {
+    mode: action.mode,
   });
 };
 
@@ -58,7 +79,8 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
-
+    case actionTypes.SET_MODE:
+      return setMode(state, action);
     case actionTypes.ADD_MANGA:
       return addManga(state, action);
     case actionTypes.GET_MANGA:

@@ -2,98 +2,166 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../../store/actions/auth";
-import { Form, FormControl, Button } from "react-bootstrap";
-import { Paper } from "@material-ui/core";
+import { Form, FormControl } from "react-bootstrap";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
 import { Divider } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
 
+const validEmailRegex = RegExp(
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      email_error: "",
+      show_password: false,
     };
+  }
+  componentDidUpdate() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
   }
   handlesubmit = (event) => {
     event.preventDefault();
     this.props.onAuth(this.state.email, this.state.password);
-    this.props.history.push("/");
+  };
+  handleShowPassword = () => {
+    this.setState({ show_password: !this.state.show_password });
   };
   handleChange = (event) => {
+    var email = validEmailRegex.test(event.target.value)
+      ? ""
+      : "Email is not valid!";
     this.setState({
-      email: event.target.value
+      email: event.target.value,
+      email_error: email,
     });
+
     console.log(this.state);
   };
   handleChangeTwo = (event) => {
     this.setState({
-      password: event.target.value
+      password: event.target.value,
     });
     console.log(this.state);
   };
   render() {
+    console.log(this.props.error);
     return (
-      <Paper className="p-4">
-        <Helmet>
-          <title>Login</title>
-          <meta
-            name="description"
-            content="Login to access your stored manga data"
-          />
-        </Helmet>
-        <Divider horizontal>
-          <h3>Login</h3>
-        </Divider>
-        <Form>
-          <Form.Group controlId="formusername">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
+      <div className="login-anchor">
+        <Paper elevation="3" className="p-4 login-paper">
+          <Helmet>
+            <title>Login</title>
+            <meta
+              name="description"
+              content="Login to access your stored manga data"
+            />
+          </Helmet>
+          <Divider horizontal>
+            <h3>Login</h3>
+          </Divider>
+          <form className="signup-form" noValidate>
+            <TextField
+              required
+              fullWidth
+              error={
+                this.props.error.non_field_errors !== "" ||
+                this.state.email_error !== ""
+              }
+              helperText={this.state.email_error}
+              id="email"
+              name="email"
+              label="E-mail"
               value={this.state.email}
               onChange={this.handleChange}
               type="email"
-              placeholder="Enter email"
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else
-            </Form.Text>
-          </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
+            <TextField
+              required
+              fullWidth
+              error={this.props.error.non_field_errors !== ""}
+              id="password1"
+              name="password1"
+              label="Password"
+              type={this.state.show_password ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Tooltip title="Toggle Visibility">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={this.handleShowPassword}
+                      >
+                        {this.state.show_password ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </InputAdornment>
+                ),
+              }}
               value={this.state.password}
               onChange={this.handleChangeTwo}
-              placeholder="enter your password"
             />
-          </Form.Group>
-          <Button
-            onClick={this.handlesubmit}
-            variant="outline-dark"
-            type="submit"
-          >
-            Login
-          </Button>{" "}
-          <Link to="/signup/">
-            <h5 className="d-inline-block">or Signup...</h5>
-          </Link>
-        </Form>
-      </Paper>
+            {this.props.error.non_field_errors !== "" && (
+              <div className="text-danger">
+                {this.props.error.non_field_errors}
+              </div>
+            )}
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className="mt-3"
+              disabled={this.state.email_error !== ""}
+              onClick={this.handlesubmit}
+              type="submit"
+            >
+              Login
+            </Button>{" "}
+          </form>
+          <div className="text-center mt-3">Or Login with</div>
+          <div className="sign-login text-center">
+            <p className="text-muted login-text text-center">
+              Not a member?{" "}
+              <span>
+                <Link className="no-blue" to="/signup/">
+                  Sign up Now
+                </Link>
+              </span>
+            </p>
+          </div>
+        </Paper>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading,
-    error: state.error
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isAuthenticated: state.auth.token != null,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (username, password) =>
-      dispatch(actions.authLogin(username, password))
+      dispatch(actions.authLogin(username, password)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -3,49 +3,78 @@ import React, { useState, useEffect } from "react";
 import { Paper } from "@material-ui/core";
 import MangaIcon from "./../components/MangaCards/LastReadIcon";
 import { Row } from "react-bootstrap";
-import { Divider, SearchCategory } from "semantic-ui-react";
+import {
+  Divider,
+  SearchCategory,
+  Segment,
+  Loader,
+  Header,
+  Icon,
+} from "semantic-ui-react";
 import axios from "axios";
+import { CardGroup } from "semantic-ui-react";
 
 const MangaSearch = (props) => {
   const [manga, setManga] = useState(null);
+  const [correctManga, setCorrectManga] = useState([]);
   useEffect(() => {
-    axios.get("/mangasearch/").then((res) => {
-      setManga(res.data);
-    });
+    axios
+      .get("/mixed/search/", {
+        params: {
+          search: props.params,
+        },
+      })
+      .then((res) => {
+        setManga(res.data);
+      });
   }, []);
-  console.log(manga);
+
+  const dismissModal = () => {
+    props.selected();
+  };
+  console.log(props);
   return (
-    <Paper>
+    <Paper className="recent-paper">
       <Divider horizontal>
-        <h2>All Manga</h2>
+        <Header className="need-theme" as="h3">
+          <Icon name="trophy" />
+          Search Results
+        </Header>
       </Divider>
-      {manga === null && (
-        <h3>
-          Sorry, no manga found for your search parameter "{props.params}"
-        </h3>
+      {manga == null ? (
+        <Segment>
+          <div style={{ height: "200px" }}>
+            <Loader active size="big">
+              Loading...
+            </Loader>
+          </div>
+        </Segment>
+      ) : (
+        <div>
+          {manga.length > 0 ? (
+            <CardGroup className="p-3" itemsPerRow={8}>
+              {manga.map((manga) => (
+                <MangaIcon
+                  col_size={6}
+                  dismiss={dismissModal}
+                  loading={props.loading}
+                  title={manga.title}
+                  author={manga.author}
+                  rank={manga.rank}
+                  media_type={manga.media_type}
+                  alias={manga.alias}
+                  image_url={manga.image_url}
+                  description={manga.description}
+                />
+              ))}
+            </CardGroup>
+          ) : (
+            <h3>
+              Sorry, no manga found for your search parameter "{props.params}"
+            </h3>
+          )}
+        </div>
       )}
-      <Row>
-        {manga != null &&
-          manga
-            .filter((manga) => {
-              console.log(manga.alias.includes(props.params.toLowerCase()));
-              return (
-                manga.alias.includes(props.params.toLowerCase()) ||
-                manga.alias.indexOf(props.params) != -1
-              );
-            })
-            .map((manga) => (
-              <MangaIcon
-                col_size={6}
-                loading={props.loading}
-                title={manga.title}
-                author={manga.author}
-                rank={manga.rank}
-                image_url={manga.image_url}
-                description={manga.description}
-              />
-            ))}
-      </Row>
     </Paper>
   );
 };

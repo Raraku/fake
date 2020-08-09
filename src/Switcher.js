@@ -6,7 +6,7 @@ import Web from "./Display/Web/Web";
 class Switcher extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
-    this.props.onTryGetManga();
+    this.props.checkUserDisplayMode();
   }
 
   render() {
@@ -16,14 +16,14 @@ class Switcher extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onTryAutoSignup: () => dispatch(actions.authCheckState()),
-    onTryGetManga: () => dispatch(actions.getManga())
+    checkUserDisplayMode: () => dispatch(actions.checkMode()),
   };
 };
 

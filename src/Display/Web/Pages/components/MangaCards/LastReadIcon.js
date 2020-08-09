@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Card, Col } from "react-bootstrap";
 import he from "he";
-import { Placeholder, Image } from "semantic-ui-react";
+import { Placeholder, Image, Label, Card, Divider } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 function MangaIcon(props) {
@@ -11,91 +10,71 @@ function MangaIcon(props) {
     Kami: "green",
     S: "yellow",
     A: "teal",
-    B: "brown"
+    B: "brown",
   };
-  return (
-    <Col className="manga-card" xs={12} lg={props.col_size}>
-      <Card
-        as={Link}
-        to={`/manga/${props.alias}/`}
-        style={{ flexDirection: "row" }}
-      >
-        <div className="w-25 my-div">
-          <div style={{ height: "100%" }}>
-            <Image
-              fluid
-              label={{
-                as: "a",
-                color: color[props.rank],
-                content: `${props.rank}`,
-                ribbon: true
-              }}
-              hidden={show}
-              style={{ width: "100%" }}
-              src={props.image_url}
-              alt="manga-image"
-              referrerPolicy="no-referrer"
-              loading="lazy"
-              onError={(setErrored) => {
-                setShow(true);
-              }}
-              onLoad={() => {
-                setErrored(false);
-              }}
-            />
-            {errored && (
-              <Placeholder style={{ height: "100%", width: "100%" }}>
-                <Placeholder.Image rectangular />
-              </Placeholder>
-            )}
-          </div>
-        </div>
-        <Card className="w-75 my-div">
-          <Card.Body>
-            <Card.Title>
-              {props.loading ? (
-                <Placeholder>
-                  <Placeholder.Line />
-                </Placeholder>
-              ) : (
-                <div>{props.title}</div>
-              )}
-            </Card.Title>
-            {props.loading ? (
-              <Placeholder>
-                <Placeholder.Line />
-                <Placeholder.Paragraph>
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                </Placeholder.Paragraph>
-              </Placeholder>
-            ) : (
-              <div>
-                <Card.Text className="mycard-description">
-                  Description: {he.decode(props.description)}
-                </Card.Text>
 
-                <Card.Subtitle className="text-muted">
-                  {props.author}
-                </Card.Subtitle>
-                {props.last_read && (
-                  <footer className="blockquote-footer">
-                    {" "}
-                    last read {props.last_read}
-                  </footer>
-                )}
-              </div>
-            )}
-          </Card.Body>
-        </Card>
-      </Card>
-    </Col>
+  return (
+    <Card
+      as={Link}
+      to={
+        props.media_type == 0
+          ? `/manga/${props.alias}/`
+          : `/anime/${props.alias}`
+      }
+      onClick={props.dismiss}
+    >
+      <Image
+        fluid
+        ui={false}
+        label={{
+          as: "a",
+          color: color[props.rank],
+          content: `${props.rank}`,
+          ribbon: true,
+        }}
+        style={
+          show ? {} : { width: "150px", height: "230px", visibility: "hidden" }
+        }
+        src={props.image_url}
+        alt="manga-image"
+        referrerPolicy="no-referrer"
+        loading="lazy"
+        onError={(setErrored) => {
+          setShow(false);
+        }}
+        onLoad={() => {
+          setShow(true);
+        }}
+      />
+      {!show && (
+        <Placeholder style={{ height: "100%", width: "100%" }}>
+          <Placeholder.Image rectangular />
+        </Placeholder>
+      )}
+      <Card.Content>
+        <Card.Header>
+          {props.loading ? (
+            <Placeholder>
+              <Placeholder.Line />
+            </Placeholder>
+          ) : (
+            <div>{props.title}</div>
+          )}
+        </Card.Header>
+        {props.loading ? (
+          <Placeholder>
+            <Placeholder.Line />
+            <Placeholder.Paragraph>
+              <Placeholder.Line />
+              <Placeholder.Line />
+              <Placeholder.Line />
+            </Placeholder.Paragraph>
+          </Placeholder>
+        ) : (
+          <Card.Meta className="text-muted one-line">{props.author}</Card.Meta>
+        )}
+      </Card.Content>
+    </Card>
   );
 }
 export default MangaIcon;
-
-MangaIcon.defaultProps = {
-  col_size: 6,
-  last_read: false
-};
